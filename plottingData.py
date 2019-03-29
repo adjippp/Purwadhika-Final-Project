@@ -6,16 +6,24 @@ import io
 import base64
 
 customers = pd.read_csv('biodata_customer.csv') 
-transactions = pd.read_csv('data_transaksi2.csv')
+transactions = pd.read_csv('datatransaksi.csv')
+transactions['products'] = transactions['products'].apply(lambda x: [int(i) for i in x.split('|')])
+# print(transactions)
 barang=pd.read_csv('produk_lazada.csv')
-transactions = transactions.drop(columns='Unnamed: 2')
 idChanger = np.arange(0,len(barang),1)
-barang['id_produk'] = idChanger
-cek=np.zeros(5)
-cek2=np.array(transactions['products'][transactions['customerId']==0].head().values)
+barang['productId'] = idChanger
+
+transactions=transactions.products.apply(pd.Series).merge(transactions, left_index = True, right_index = True).drop(["products"], axis = 1) \
+    .melt(id_vars = ['customerId'], value_name = "products").drop("variable", axis = 1).dropna()
+transactions['products']=transactions['products'].astype(int)
+transactions=transactions.sort_values(by=['customerId']).reset_index().drop(columns='index')
+cek=np.array(transactions['customerId'][transactions['customerId']==0].head(10).values)
+cek2=np.array(transactions['products'][transactions['customerId']==0].head(10).values)
 for i in range(1,11):
-        cek=np.append(cek,np.array(transactions['customerId'][transactions['customerId']==i].head(10).values),axis=0)
-        cek2=np.append(cek2,np.array(transactions['products'][transactions['customerId']==i].head(10).values),axis=0)
+        tampung1=transactions['customerId'][transactions['customerId']==i].head(10).values
+        tampung2=transactions['products'][transactions['customerId']==i].head(10).values
+        cek=np.append(cek,tampung1)
+        cek2=np.append(cek2,tampung2)
 
 # print(cek)
 # print(cek2)
