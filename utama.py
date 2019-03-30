@@ -3,6 +3,7 @@ import loginForm as lf
 import registerToCSV as reg
 import plottingData as pltd
 import utama
+import recomm
 import search as sr
 
 app = Flask(__name__)
@@ -11,7 +12,8 @@ login=False
 
 @app.route("/")
 def main():
-    return render_template('index.html')
+    popularity=recomm.getPopularity()
+    return render_template('index.html',isiPop=popularity)
  
 @app.route('/showSignUp')
 def showSignUp():
@@ -64,7 +66,10 @@ def signIn():
 def index():
     if(utama.login==True):
         nama=lf.getName()
-        return render_template('index2.html',nama=nama)
+        custId=lf.getID()
+        isiPop=recomm.getPopularity()
+        isirecomm=recomm.getSimilarity(int(custId))
+        return render_template('index2.html',nama=nama,custId=custId,isiPop=isiPop,isirekom=[isirecomm.to_html()])
     else:
         return render_template('belumlogin.html')
 
@@ -75,12 +80,10 @@ def search():
     if(utama.login==True):
         nama=lf.getName()
         srch=request.form['search']
-        print("Masuk sini please",srch)
         datasearch=sr.searchProduk(srch)
         return render_template('search2.html.html',nama=nama,df=[datasearch.to_html()],titles=datasearch.columns.values) #atau bisa dengan data={'sesuatu':isi,'sesuatu2':isi2}
     else:
         srch=request.form['search']
-        print("Masuk sini please",srch)
         datasearch=sr.searchProduk(srch)
         return render_template('search.html',df=[datasearch.to_html()],titles=datasearch.columns.values)
 

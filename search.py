@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
-import time
-from sklearn.preprocessing import LabelEncoder
+
+
 barang=pd.read_csv('produk_lazada.csv',delimiter=',')
 idChanger = np.arange(0,len(barang),1)
 barang['simple_sku'] = idChanger
