@@ -25,7 +25,7 @@ def showSignIn():
 
 @app.route('/showPlot')
 def showPlot():
-    grafiks=pltd.build_graph(pltd.cek,pltd.cek2)
+    grafiks=pltd.build_graph(pltd.cek,pltd.cek2,'default')
     return render_template('plotting.html',grafik=grafiks)
 
 @app.route('/suksesdaftar')
@@ -91,10 +91,34 @@ def search():
 def showPlot2():
     if(utama.login==True):
         nama=lf.getName()
-        grafiks=pltd.build_graph(pltd.cek,pltd.cek2)
+        grafiks=pltd.build_graph(pltd.cek,pltd.cek2,'default')
         return render_template('plotting2.html',grafik=grafiks,nama=nama) #atau bisa dengan data={'sesuatu':isi,'sesuatu2':isi2}
     else:
         return render_template('belumlogin.html')
+
+@app.route('/showPlotTop')
+def showPlotTop():
+    if(utama.login==True):
+        nama=lf.getName()
+        x,y=pltd.dataForRecomPlot('popularity')
+        grafiks=pltd.build_graph(x,y,'top')
+        return render_template('plottop10_2.html',grafik=grafiks,nama=nama) #atau bisa dengan data={'sesuatu':isi,'sesuatu2':isi2}
+    else:
+        x,y=pltd.dataForRecomPlot('popularity')
+        grafiks=pltd.build_graph(x,y,'top')
+        return render_template('plottop10.html',grafik=grafiks) #atau bisa dengan data={'sesuatu':isi,'sesuatu2':isi2}
+
+@app.route('/showPlotSim')
+def showPlotSim():
+    if(utama.login==True):
+        nama=lf.getName()
+        x,y=pltd.dataForRecomPlot('similarity')
+        grafiks=pltd.build_graph(x,y,'sim')
+        return render_template('plottingsim2.html',grafik=grafiks,nama=nama) #atau bisa dengan data={'sesuatu':isi,'sesuatu2':isi2}
+    else:
+        x,y=pltd.dataForRecomPlot('similarity')
+        grafiks=pltd.build_graph(x,y,'sim')
+        return render_template('plottingsim.html',grafik=grafiks) #atau bisa dengan data={'sesuatu':isi,'sesuatu2':isi2}
 '''
 dalam app.route dapat dilakukan
 @app.route('/sesuatu/<string:x>)
