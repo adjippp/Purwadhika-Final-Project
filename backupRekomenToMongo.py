@@ -17,5 +17,8 @@ dataRekom = pd.read_csv('similarityRecommendation.csv')
 dataTop_json = json.loads(dataTop.to_json(orient='records'))
 dataRekom_json = json.loads(dataRekom.to_json(orient='records'))
 
+dbtop10.remove()
+dbrekomen.remove()
+
 dbtop10.insert(dataTop_json)
 dbrekomen.insert(dataRekom_json)
