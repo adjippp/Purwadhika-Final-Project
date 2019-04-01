@@ -81,7 +81,7 @@ def search():
         nama=lf.getName()
         srch=request.form['search']
         datasearch=sr.searchProduk(srch)
-        return render_template('search2.html.html',nama=nama,df=[datasearch.to_html()],titles=datasearch.columns.values) #atau bisa dengan data={'sesuatu':isi,'sesuatu2':isi2}
+        return render_template('search2.html',nama=nama,df=[datasearch.to_html()],titles=datasearch.columns.values) #atau bisa dengan data={'sesuatu':isi,'sesuatu2':isi2}
     else:
         srch=request.form['search']
         datasearch=sr.searchProduk(srch)
