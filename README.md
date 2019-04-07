@@ -7,7 +7,7 @@ Machine Learning Model : Turicreate (Using Linux Ubuntu)
 
 Web App : Flask on Windows 8.1
 
-Show Top 10 Popular on web page
+Show Top 10 Popular on web page (most purchased product)
 
 
 Show 10 Recommended Item (Cosine Similarity) each customer login (different user different recommend).
