@@ -1,7 +1,7 @@
 # Purwadhika-Final-Project
 Final Project for Purwadhika 5 Challenge Day Coding
 
-Dataset : From Kaggle use Produk Lazada Keyword, transaction data, customer biodata
+Dataset : From Kaggle use Produk Lazada Keyword, transaction data (about 130.000+ transaction), customer biodata (1000 customer)
 
 Machine Learning Model : Turicreate (Using Linux Ubuntu)
 
