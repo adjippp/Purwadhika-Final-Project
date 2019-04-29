@@ -1,5 +1,5 @@
 # Purwadhika-Final-Project
-Final Project for Purwadhika 5 Challenge Day Coding
+Final Project for Purwadhika 5 Days Coding Challenge
 
 Dataset : From Kaggle use Produk Lazada Keyword, transaction data (about 130.000+ transaction), customer biodata (1000 customer)
 
